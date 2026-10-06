@@ -12,5 +12,7 @@ int main(void)
         printf("\nAprobado\n");
     }
 
-    return 0;
+    return 0; 
+
+  
 }
