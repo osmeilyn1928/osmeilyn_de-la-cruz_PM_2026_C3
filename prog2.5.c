@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 
-int main(void) {
+int main(void){
     int op, t;
     float res;
 
@@ -33,5 +33,3 @@ int main(void) {
     printf("El resultado es: %.2f\n", res);
 
     return 0;
-}
-```
