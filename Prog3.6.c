@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main(void) {
+    int cantidad = 0;
+    float salario, nomina = 0, promedio;
+
+    printf("Ingrese el salario del profesor (0 para terminar): ");
+    scanf("%f", &salario);
+
+    while (salario != 0) {
+        nomina = nomina + salario;
+        cantidad++;
+
+        printf("Ingrese otro salario (0 para terminar): ");
+        scanf("%f", &salario);
+    }
+
+    if (cantidad > 0) {
+        promedio = nomina / cantidad;
+        printf("\nNomina total: %.2f\n", nomina);
+        printf("Promedio de salarios: %.2f\n", promedio);
+    } else {
+        printf("No se ingresaron salarios.\n");
+    }
+
+    return 0;
+}
