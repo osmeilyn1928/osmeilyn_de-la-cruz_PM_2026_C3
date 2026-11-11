@@ -1,0 +1,102 @@
+
+#include <stdio.h>
+
+int buscar(int VEC[], int N, int ELE) {
+    int i;
+
+    for (i = 0; i < N; i++) {
+        if (VEC[i] == ELE) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+int insertar(int VEC[], int N, int ELE) {
+    if (N >= 100) {
+        printf("El arreglo esta lleno.\n");
+        return N;
+    }
+
+    if (buscar(VEC, N, ELE) != -1) {
+        printf("Ese numero ya existe.\n");
+        return N;
+    }
+
+    VEC[N] = ELE;
+    return N + 1;
+}
+
+int eliminar(int VEC[], int N, int ELE) {
+    int pos, i;
+
+    pos = buscar(VEC, N, ELE);
+
+    if (pos == -1) {
+        printf("El numero no existe.\n");
+        return N;
+    }
+
+    for (i = pos; i < N - 1; i++) {
+        VEC[i] = VEC[i + 1];
+    }
+
+    return N - 1;
+}
+
+void imprimir(int VEC[], int N) {
+    int i;
+
+    printf("Arreglo: ");
+
+    for (i = 0; i < N; i++) {
+        printf("%d ", VEC[i]);
+    }
+
+    printf("\n");
+}
+
+int main(void) {
+    int VEC[100];
+    int N, i, opcion, ELE;
+
+    printf("Cuantos elementos tendra el arreglo (1-100): ");
+    scanf("%d", &N);
+
+    if (N < 1 || N > 100) {
+        printf("Cantidad invalida.\n");
+        return 1;
+    }
+
+    for (i = 0; i < N; i++) {
+        printf("Ingresa el elemento %d: ", i + 1);
+        scanf("%d", &VEC[i]);
+    }
+
+    imprimir(VEC, N);
+
+    printf("\n1. Insertar elemento\n");
+    printf("2. Eliminar elemento\n");
+    printf("Selecciona una opcion: ");
+    scanf("%d", &opcion);
+
+    if (opcion == 1) {
+        printf("Que numero deseas insertar: ");
+        scanf("%d", &ELE);
+
+        N = insertar(VEC, N, ELE);
+    } else if (opcion == 2) {
+        printf("Que numero deseas eliminar: ");
+        scanf("%d", &ELE);
+
+        N = eliminar(VEC, N, ELE);
+    } else {
+        printf("Opcion invalida.\n");
+        return 1;
+    }
+
+    imprimir(VEC, N);
+
+    return 0;
+}
