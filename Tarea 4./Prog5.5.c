@@ -14,17 +14,27 @@ int buscar(int VEC[], int N, int ELE) {
 }
 
 int insertar(int VEC[], int N, int ELE) {
+    int i;
+
     if (N >= 100) {
         printf("El arreglo esta lleno.\n");
         return N;
     }
 
     if (buscar(VEC, N, ELE) != -1) {
-        printf("Ese numero ya existe.\n");
+        printf("El numero ya existe.\n");
         return N;
     }
 
-    VEC[N] = ELE;
+    i = N - 1;
+
+    while (i >= 0 && VEC[i] > ELE) {
+        VEC[i + 1] = VEC[i];
+        i--;
+    }
+
+    VEC[i + 1] = ELE;
+
     return N + 1;
 }
 
@@ -45,7 +55,7 @@ int eliminar(int VEC[], int N, int ELE) {
     return N - 1;
 }
 
-void imprimir(int VEC[], int N) {
+void mostrar(int VEC[], int N) {
     int i;
 
     printf("Arreglo: ");
@@ -59,44 +69,42 @@ void imprimir(int VEC[], int N) {
 
 int main(void) {
     int VEC[100];
-    int N, i, opcion, ELE;
+    int N, i, ELE, opcion;
 
-    printf("Cuantos elementos tendra el arreglo (1-100): ");
+    printf("Cantidad de elementos (1-100): ");
     scanf("%d", &N);
 
     if (N < 1 || N > 100) {
         printf("Cantidad invalida.\n");
-        return 1;
+        return 0;
     }
 
+    printf("Introduce los numeros en orden creciente:\n");
+
     for (i = 0; i < N; i++) {
-        printf("Ingresa el elemento %d: ", i + 1);
         scanf("%d", &VEC[i]);
     }
 
-    imprimir(VEC, N);
+    mostrar(VEC, N);
 
-    printf("\n1. Insertar elemento\n");
-    printf("2. Eliminar elemento\n");
-    printf("Selecciona una opcion: ");
+    printf("1. Insertar numero\n");
+    printf("2. Eliminar numero\n");
+    printf("Elige una opcion: ");
     scanf("%d", &opcion);
 
-    if (opcion == 1) {
-        printf("Que numero deseas insertar: ");
-        scanf("%d", &ELE);
+    printf("Introduce el numero: ");
+    scanf("%d", &ELE);
 
+    if (opcion == 1) {
         N = insertar(VEC, N, ELE);
     } else if (opcion == 2) {
-        printf("Que numero deseas eliminar: ");
-        scanf("%d", &ELE);
-
         N = eliminar(VEC, N, ELE);
     } else {
         printf("Opcion invalida.\n");
-        return 1;
+        return 0;
     }
 
-    imprimir(VEC, N);
+    mostrar(VEC, N);
 
     return 0;
 }
